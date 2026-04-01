@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Carter Jardine ePortfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .stats-bar .stat-block { background: var(--surface); }
+    @media (max-width: 640px) { .stats-bar { grid-template-columns: 1fr 1fr; } }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 22px; height: 2px;
+      background: var(--accent2);
+      border-radius: 2px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 21/9;
+      background: linear-gradient(135deg, #13151c 0%, #1c1f2b 50%, #0f1117 100%);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .hero-img .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(93,255,182,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(93,255,182,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-img .hero-label {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+    }
+    .hero-img .hero-label h2 {
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .hero-img .hero-label p { color: var(--muted); font-size: 0.9rem; }
+
+    .outcome-box {
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      background: rgba(93,255,182,0.04);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 24px 0;
+    }
+    .outcome-box p { color: var(--text); margin: 0; font-size: 1rem; }
+
+    .step-num {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(93,255,182,0.1);
+      border: 1px solid rgba(93,255,182,0.2);
+      border-radius: 99px;
+      padding: 3px 10px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .cs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media (max-width: 640px) { .cs-grid { grid-template-columns: 1fr; } }
+    .cs-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+    .cs-card .cs-label {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .challenge .cs-label { color: #ff7c7c; }
+    .solution .cs-label  { color: var(--accent); }
+    .cs-card p { font-size: 0.9rem; color: var(--text); }
+
+    .result-highlight {
+      background: linear-gradient(135deg, rgba(93,255,182,0.07), rgba(93,168,255,0.05));
+      border: 1px solid rgba(93,255,182,0.18);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin: 32px 0;
+    }
+    .result-highlight h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.05rem; }
+    .result-highlight ul { list-style: none; padding: 0; }
+    .result-highlight ul li {
+      padding: 6px 0 6px 22px;
+      position: relative;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .result-highlight ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Battery-specific highlight card */
+    .my-contrib-card {
+      background: linear-gradient(135deg, rgba(93,255,182,0.05), rgba(93,168,255,0.03));
+      border: 1px solid rgba(93,255,182,0.25);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin: 24px 0;
+    }
+    .my-contrib-card .contrib-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(93,255,182,0.1);
+      border: 1px solid rgba(93,255,182,0.2);
+      border-radius: 99px;
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Carter <span>Jardine</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">About Me</a></li>
+    <li><a href="project.html" class="active">Project</a></li>
+    <li><a href="reflection.html">Reflection</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <div class="eyebrow fade-up">ePortfolio — Capstone Project</div>
+  <h1 class="fade-up delay-1">Search &amp; Rescue <em>UAV VTOL Relay</em></h1>
+  <p class="fade-up delay-2" style="color:var(--muted);font-size:1.05rem;margin-bottom:40px;max-width:680px;">
+    A fixed-wing VTOL drone designed for North Shore Rescue (Vancouver, BC) to extend
+    communication range and aid coordination in remote mountain terrain — maximizing
+    flight time while staying portable, lightweight, and field-rugged.
+  </p>
+
+  <!-- Hero banner -->
+  <div class="hero-img fade-up delay-2">
+    <div class="hero-grid"></div>
+    <div class="hero-label">
+      <!-- Replace with your UAV render or photo:
+           <img src="vtol-hero.jpg" alt="SAR UAV VTOL" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);" /> -->
+      <h2>SAR UAV VTOL Relay</h2>
+      <p>Replace this with your best photo or render of the final prototype</p>
+    </div>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="stats-bar fade-up delay-3">
+    <div class="stat-block">
+      <div class="number">4</div>
+      <div class="label">Team Members</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">8<span style="font-size:1rem">mo</span></div>
+      <div class="label">Duration</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">3+</div>
+      <div class="label">Battery Iterations</div>
+    </div>
+    <div class="stat-block">
+      <div class="number">VTOL</div>
+      <div class="label">Aircraft Type</div>
+    </div>
+  </div>
+
+  <!-- ===== SECTION 1: Overview ===== -->
+  <section class="fade-up">
+    <div class="section-label">The Big Picture</div>
+    <h2>What We <em>Built</em> — and Why</h2>
+    <p>
+      <strong>For the non-engineer:</strong> When rescue teams search for missing persons in rugged
+      mountain terrain, radio communication often fails — terrain blocks signals and distances
+      quickly exceed handheld radio range. Our team built a drone that acts as a flying relay
+      station: it takes off vertically like a helicopter, transitions to efficient fixed-wing
+      flight, and hovers in position to bridge communication gaps between rescuers on the ground.
+    </p>
+    <p>
+      Think of it like a cell tower — but one that can be deployed anywhere in minutes, launched
+      from a backpack, and kept aloft far longer than a conventional quadcopter. Our primary client
+      was <strong>North Shore Rescue</strong>, one of Canada's busiest mountain rescue teams, based
+      out of Vancouver, BC.
+    </p>
+    <div class="outcome-box">
+      <p>
+        <strong>Core Outcome:</strong> A lightweight, portable VTOL UAV platform optimized for
+        maximum flight endurance, capable of acting as a communication relay in remote search
+        and rescue environments — complete with a custom-designed battery system for peak
+        power delivery and thermal performance.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ===== SECTION 2: Objectives ===== -->
+  <section class="fade-up">
+    <div class="section-label">Objectives &amp; Constraints</div>
+    <h2>Why We Did <em>It</em></h2>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <h3>Project Objectives</h3>
+        <ul style="padding-left:18px; margin-top:8px; font-size:0.92rem; line-height:1.9;">
+          <li>Maximize airborne flight time to extend relay coverage duration</li>
+          <li>Design for portability — the system must be backpackable by rescue personnel</li>
+          <li>VTOL capability for launch from confined or rough terrain (no runway needed)</li>
+          <li>Robust construction to withstand mountain weather and rough handling</li>
+          <li>Optimized power system to support extended missions on a single charge</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Design Constraints</h3>
+        <ul style="padding-left:18px; margin-top:8px; font-size:0.92rem; line-height:1.9;">
+          <li><strong>Weight:</strong> Must be carryable in the field — minimizing total mass was critical</li>
+          <li><strong>Weather:</strong> Operational in cold, wet, high-altitude BC conditions</li>
+          <li><strong>Budget:</strong> Capstone-scale academic budget with real component costs</li>
+          <li><strong>Airworthiness:</strong> Safe, stable flight characteristics with reliable VTOL transition</li>
+          <li><strong>Battery:</strong> Cells selected for high energy density and safe thermal operation</li>
+        </ul>
+      </div>
+    </div>
+    <figure style="margin-top:24px;">
+      <div class="img-placeholder" style="aspect-ratio:16/7;">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <span>Insert: Requirements table, system block diagram, or stakeholder map</span>
+      </div>
+      <figcaption>Fig. 1 — System requirements and key performance targets defined with North Shore Rescue at project outset.</figcaption>
+    </figure>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ===== SECTION 3: Design Process ===== -->
+  <section class="fade-up">
+    <div class="section-label">Design Process</div>
+    <h2>How We <em>Got There</em></h2>
+    <p style="color:var(--muted); margin-bottom:36px;">
+      The path from problem to flying prototype was iterative — here's the honest story.
+    </p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="phase">Phase 01</div>
+        <h3>Problem Definition &amp; Stakeholder Engagement</h3>
+        <p>
+          We began by engaging with North Shore Rescue to understand their operational environment —
+          communication dead zones, terrain types, deployment workflows, and what existing solutions
+          fail to address. This shaped our requirements document and confirmed that
+          <strong>flight endurance was the single most critical design parameter</strong>, since
+          a relay drone that runs out of battery mid-operation is worse than no relay at all.
+        </p>
+        <figure style="margin-top:16px;">
+          <div class="img-placeholder" style="aspect-ratio:16/7;">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <span>Insert: Stakeholder notes, requirements document, or use-case scenario diagram</span>
+          </div>
+          <figcaption>Fig. 2 — Early phase: defining the SAR operational context and translating field requirements into engineering specifications.</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-item">
+        <div class="phase">Phase 02</div>
+        <h3>Airframe Concept Selection</h3>
+        <p>
+          We evaluated several UAV configurations — multirotor, flying wing, conventional fixed-wing,
+          and VTOL hybrids — using a weighted decision matrix against our requirements. The
+          <strong>VTOL fixed-wing (tailsitter / pusher hybrid) configuration</strong> was selected
+          because it combined the vertical takeoff simplicity of a multirotor with the long-range
+          efficiency of fixed-wing flight.
+        </p>
+        <p>
+          Airfoil selection was informed by <strong>FEM analysis and aerodynamic calculations</strong>
+          to optimize lift-to-drag ratio at our target cruise speed and altitude range. We modelled
+          airflow behaviour digitally before committing to any physical build.
+        </p>
+        <div class="cs-grid">
+          <div class="cs-card challenge">
+            <div class="cs-label">🚫 Challenge</div>
+            <p>Balancing the competing demands of VTOL lift (needs powerful motors and large props) against efficient fixed-wing cruise (needs lightweight, streamlined design) in a single airframe.</p>
+          </div>
+          <div class="cs-card solution">
+            <div class="cs-label">✓ How We Solved It</div>
+            <p>Carefully optimized motor placement and prop sizing for each flight phase, accepting a trade-off in hover efficiency in favour of better cruise endurance — aligned with our primary objective.</p>
+          </div>
+        </div>
+        <figure style="margin-top:16px;">
+          <div class="img-placeholder" style="aspect-ratio:16/7;">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/></svg>
+            <span>Insert: Airfoil analysis output, concept comparison diagrams, or decision matrix</span>
+          </div>
+          <figcaption>Fig. 3 — Airfoil and configuration analysis: comparing candidate designs on endurance, stability, and portability criteria.</figcaption>
+        </figure>
+      </div>
+
+      <div class="timeline-item">
+        <div class="phase">Phase 03</div>
+        <h3>CAD Design &amp; Structural Iteration</h3>
+        <p>
+          Multiple CAD iterations of the VTOL airframe were completed in <strong>Fusion 360</strong>.
+          Each iteration refined the structural layout, motor mount geometry, and internal component
+          packaging. Getting the VTOL assembly geometry right — particularly the transition between
+          hover and forward flight posture — required several design revisions before achieving
+          satisfactory flight characteristic predictions.
+        </p>
+        <div class="split" style="margin-top:24px;">
+          <figure>
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg>
+              <span>Insert: CAD render — early airframe concept</span>
+            </div>
+            <figcaption>Fig. 4 — Early CAD concept: initial airframe geometry before structural refinement.</figcaption>
+          </figure>
+          <figure>
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Insert: FEM / airflow analysis visualization</span>
+            </div>
+            <figcaption>Fig. 5 — Airflow analysis output showing lift distribution and drag characteristics at cruise conditions.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="phase">Phase 04</div>
+        <h3>Battery System Design — My Primary Contribution</h3>
+        <p>
+          The battery system was my primary individual responsibility on this project. Designing the
+          right power system for a long-endurance UAV is non-trivial — cell selection, pack geometry,
+          thermal management, and structural fitment all interact.
+        </p>
+
+        <!-- Battery highlight card -->
+        <div class="my-contrib-card">
+          <div class="contrib-badge">⚡ My Contribution — Battery Lead</div>
+          <h3 style="margin-bottom:12px;">Cell Selection &amp; Pack Design</h3>
+          <p>
+            Cell selection began with modelling <strong>expected load profiles</strong> during hover,
+            transition, and cruise phases. I evaluated multiple lithium-polymer and lithium-ion cell
+            chemistries against energy density, discharge rate (C-rating), and weight targets.
+            The final cells were selected to maximize capacity while staying within the continuous
+            discharge current demanded by the motor system during peak hover load.
+          </p>
+          <p>
+            The <strong>3D-printed cell casing</strong> — designed and iterated in Fusion 360 —
+            went through multiple revisions. The primary driver of each revision was
+            <strong>thermal performance</strong>: under sustained discharge, cells generate heat,
+            and inadequate cooling degrades capacity and cycle life. I progressively refined the
+            casing geometry to introduce airflow channels and improve contact surface area, ultimately
+            producing a pack that fit within the airframe envelope and stayed within safe operating
+            temperatures during flight testing.
+          </p>
+        </div>
+
+        <div class="cs-grid">
+          <div class="cs-card challenge">
+            <div class="cs-label">🚫 Challenge</div>
+            <p>Early cell casing designs trapped heat during high-current discharge, causing cell temperature to rise beyond comfortable operating margins — risking reduced capacity and premature degradation.</p>
+          </div>
+          <div class="cs-card solution">
+            <div class="cs-label">✓ How We Solved It</div>
+            <p>Redesigned the casing with integrated airflow channels between cells, allowing passive cooling from the aircraft's forward airspeed during cruise. Fitment geometry was also refined for snug, vibration-resistant mounting inside the fuselage.</p>
+          </div>
+        </div>
+
+        <div class="split" style="margin-top:24px;">
+          <figure>
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+              <span>Insert: Battery casing v1 CAD render</span>
+            </div>
+            <figcaption>Fig. 6 — Battery casing v1: initial design before thermal refinement.</figcaption>
+          </figure>
+          <figure>
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="8" y1="12" x2="8" y2="16"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="16" y1="12" x2="16" y2="16"/></svg>
+              <span>Insert: Final battery casing with cooling channels — CAD or printed part photo</span>
+            </div>
+            <figcaption>Fig. 7 — Battery casing final revision: integrated airflow channels and revised cell fitment geometry.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="phase">Phase 05</div>
+        <h3>Assembly, Integration &amp; First Flight</h3>
+        <p>
+          With the battery system validated and all subsystems assembled, the VTOL was integrated
+          and prepared for flight testing. The power system performed as designed — delivering the
+          required current during hover without thermal issues, and providing the endurance margins
+          needed to meet our flight time objective. The project culminated in a successful takeoff,
+          confirming the system was flight-ready.
+        </p>
+        <figure style="margin-top:16px;">
+          <div class="img-placeholder" style="aspect-ratio:16/7;">
+            <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Insert: Final assembled VTOL photo, flight photo, or demo video thumbnail</span>
+          </div>
+          <figcaption>Fig. 8 — Final assembled prototype ready for flight validation. The battery system enabled successful first takeoff.</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ===== SECTION 4: Contributions ===== -->
+  <section class="fade-up">
+    <div class="section-label">My Role</div>
+    <h2>Contributions &amp; <em>Ownership</em></h2>
+    <p>On a team of four, I was primarily responsible for the power system — and contributed to overall design and documentation.</p>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <div class="step-num">Technical</div>
+        <h3>Battery System Lead</h3>
+        <p>
+          Sole designer and builder of the UAV's battery pack — including cell selection based on
+          load analysis, multiple iterations of the 3D-printed cell casing in Fusion 360, thermal
+          management optimization, and final pack assembly. Also contributed to component selection
+          discussions for the broader electrical system.
+        </p>
+      </div>
+      <div class="card">
+        <div class="step-num">Non-Technical</div>
+        <h3>Design Documentation &amp; Reporting</h3>
+        <p>
+          Contributed to the team's technical report and design documentation. Participated in
+          stakeholder presentations and design reviews, communicating battery system decisions and
+          trade-offs to both the project supervisor and the North Shore Rescue client.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ===== SECTION 5: Results ===== -->
+  <section class="fade-up">
+    <div class="section-label">Outcomes</div>
+    <h2>Results &amp; <em>Impact</em></h2>
+
+    <div class="result-highlight">
+      <h3>Key Results</h3>
+      <ul>
+        <li>Battery system delivered required current during hover phase without exceeding thermal limits</li>
+        <li>Cell casing iterations successfully improved thermal management across three design revisions</li>
+        <li>Final battery pack achieved target energy capacity within the airframe weight budget</li>
+        <li>VTOL successfully achieved first takeoff — project primary objective met</li>
+        <li>Design delivered to North Shore Rescue as a functional proof-of-concept relay platform</li>
+      </ul>
+    </div>
+
+    <figure>
+      <div class="img-placeholder" style="aspect-ratio:16/7;">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Insert: Battery performance graph, flight endurance chart, or weight breakdown diagram</span>
+      </div>
+      <figcaption>Fig. 9 — Performance summary: battery capacity, discharge curves, and thermal data across design iterations.</figcaption>
+    </figure>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card" style="border-color:rgba(93,255,182,0.2);">
+        <h3 style="color:var(--accent);">What Worked Well</h3>
+        <p style="font-size:0.92rem;">
+          The iterative approach to battery casing design paid off significantly — each revision
+          produced measurable improvement in thermal performance. Committing early to a quantified
+          energy budget kept the battery design anchored to real constraints rather than optimistic
+          estimates, which meant fewer surprises at integration.
+        </p>
+      </div>
+      <div class="card" style="border-color:rgba(255,124,124,0.2);">
+        <h3 style="color:#ff9f9f;">What We'd Do Differently</h3>
+        <p style="font-size:0.92rem;">
+          With more time, active thermal monitoring during flight (cell-level temperature sensors
+          feeding back to the flight controller) would give real operational data to validate the
+          passive cooling design. We'd also explore a modular battery interface to allow hot-swap
+          of packs in the field — a major practical benefit for long SAR operations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section style="text-align:center;" class="fade-up">
+    <h2>See More of My <em>Work</em></h2>
+    <p style="color:var(--muted);margin-bottom:28px;">
+      More projects, documentation, and design files on my personal portfolio site.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://jardinedigital.ca/" target="_blank" class="btn">Visit jardinedigital.ca →</a>
+      <a href="reflection.html" class="btn ghost">Read My Reflection →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Carter Jardine · Electrical Engineering, UBC Okanagan</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reflection — Carter Jardine ePortfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .reflection-intro {
+      position: relative;
+      padding: 36px 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 56px;
+    }
+    .reflection-intro::before {
+      content: '\201C';
+      position: absolute;
+      top: -20px; left: 28px;
+      font-family: var(--font-head);
+      font-size: 7rem;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .reflection-intro p {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .q-block { margin-bottom: 48px; }
+    .q-num {
+      font-family: var(--font-head);
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.12;
+      margin-bottom: -28px;
+      display: block;
+    }
+    .q-block .question {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-top: 8px;
+      position: relative;
+    }
+    .q-block .answer {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 22px 26px;
+    }
+    .q-block .answer p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .q-block .answer p:last-child { margin-bottom: 0; }
+
+    .growth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    @media (max-width: 640px) { .growth-grid { grid-template-columns: 1fr; } }
+    .growth-card {
+      background: var(--surface2);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      border: 1px solid var(--border);
+    }
+    .growth-card .gc-label {
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .strength .gc-label { color: var(--accent); }
+    .growth-area .gc-label { color: var(--accent2); }
+    .growth-card p { font-size: 0.88rem; color: var(--text); }
+
+    .word-meter {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      background: var(--surface2);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin-bottom: 40px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .word-meter strong { color: var(--accent); font-family: var(--font-head); font-size: 1rem; }
+    .meter-bar { flex: 1; height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .meter-fill { height: 100%; background: var(--accent); border-radius: 99px; width: 0%; transition: width 1.2s ease; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Carter <span>Jardine</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">About Me</a></li>
+    <li><a href="project.html">Project</a></li>
+    <li><a href="reflection.html" class="active">Reflection</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <div class="eyebrow fade-up">ePortfolio — Reflection</div>
+  <h1 class="fade-up delay-1">Looking <em>Back</em>,<br/>Moving Forward.</h1>
+  <p class="fade-up delay-2" style="color:var(--muted);font-size:1.05rem;margin-bottom:40px;max-width:620px;">
+    A first-person reflection on learning, growth, and what it means to engineer something
+    that matters — through my Capstone and four years at UBC Okanagan.
+  </p>
+
+  <!-- Word count meter -->
+  <div class="word-meter fade-up delay-3" id="meter">
+    <strong id="wc-num">---</strong>
+    <span>/ 300+ words</span>
+    <div class="meter-bar"><div class="meter-fill" id="meter-fill"></div></div>
+    <span id="wc-status">Calculating...</span>
+  </div>
+
+  <!-- Opening statement -->
+  <div class="reflection-intro fade-up delay-3">
+    <p>
+      Engineering school is full of problems with known answers. Capstone was the first time the
+      answer genuinely didn't exist yet — and that changed everything about how I think about
+      what it means to be an engineer.
+    </p>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-block fade-up">
+    <span class="q-num">01</span>
+    <div class="question">What did you learn about the design process from your experience in this course?</div>
+    <div class="answer" id="answer-1">
+      <p>
+        The most important thing I learned about the design process is that it is genuinely
+        iterative — not just in theory, but in a way that you can only really appreciate by living
+        through it. I came into Capstone thinking that good engineering meant choosing the right
+        answer early and executing it cleanly. What I found was messier and more honest than that.
+      </p>
+      <p>
+        On the battery subsystem I was responsible for, I went through multiple casing designs
+        before arriving at something that actually worked. Each iteration wasn't a failure —
+        it was data. The thermal issues I discovered in early versions directly informed the
+        airflow channel geometry in the final design. That progression only happened because I
+        was willing to treat a version that didn't work as a result worth learning from, rather
+        than a setback to move past as quickly as possible.
+      </p>
+      <p>
+        I also learned how much the design process depends on clearly defined requirements.
+        When our objective — maximize flight time — was crisp and quantified, every design
+        decision had a reference point. Ambiguous goals create ambiguous designs. That's a
+        lesson I'll carry into every project I work on.
+      </p>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-block fade-up delay-1">
+    <span class="q-num">02</span>
+    <div class="question">Based on your experiences in this course, what are the most important attributes of an engineer?</div>
+    <div class="answer" id="answer-2">
+      <p>
+        Technical knowledge matters — but I found that the engineers on our team who moved
+        the project forward most effectively were the ones who combined technical competence
+        with two other things: intellectual honesty and the ability to communicate clearly.
+      </p>
+      <p>
+        Intellectual honesty means being willing to say "this isn't working" before it's obvious
+        to everyone else, and being genuinely open to feedback that challenges your design
+        choices. I had to revise my battery casing multiple times, and each time it required
+        letting go of something I'd spent real time on. That's hard. But the engineers who
+        can't do that end up defending bad designs instead of improving them.
+      </p>
+      <p>
+        Communication matters because engineering doesn't happen in isolation. Our client,
+        North Shore Rescue, needed to understand what we were building and why — not the
+        circuit diagrams, but the decisions and the trade-offs. Being able to explain a
+        thermal management problem to someone without an electrical background is genuinely a
+        technical skill, and one I want to keep developing.
+      </p>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-block fade-up delay-2">
+    <span class="q-num">03</span>
+    <div class="question">How has your experience on this project contributed to your understanding of the role and responsibilities of the professional engineer in society?</div>
+    <div class="answer" id="answer-3">
+      <p>
+        Working with North Shore Rescue made the stakes concrete in a way that coursework never
+        quite does. These aren't abstract users — they're volunteers who go into the mountains
+        to bring people home safely. The UAV we designed could, in a real deployment scenario,
+        be the difference between a rescuer having radio contact and not having it. That is
+        a real responsibility, and it sat differently than any lab report or assignment.
+      </p>
+      <p>
+        I came away with a much clearer sense of what professional accountability actually means.
+        The P.Eng. designation isn't just a credential — it's a statement that you take responsibility
+        for your work in the real world, where failures have consequences that extend beyond
+        a grade. Throughout this project, I found myself making decisions I genuinely had to
+        own: cell selection, thermal margins, casing geometry. If those had been wrong in the
+        field, it would have mattered.
+      </p>
+      <p>
+        My broader time at UBC Okanagan, particularly coursework on engineering ethics and
+        sustainability, gave me frameworks for thinking about the engineer's role in society.
+        Capstone gave me the context to understand why those frameworks exist.
+      </p>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-block fade-up delay-3">
+    <span class="q-num">04</span>
+    <div class="question">What strengths do you bring to your engineering career, and which areas need growth?</div>
+    <div class="answer" id="answer-4">
+      <p>
+        My strongest asset is hands-on fluency. I've been building things — drones, 3D printers,
+        electronics — since I was a teenager, and that background means I approach engineering
+        problems with a builder's intuition. I can hold a design in my head and already be
+        thinking about how it fits together physically, what will be annoying to assemble, what
+        will be hard to service. That's not something you get from lectures.
+      </p>
+      <p>
+        I'm also genuinely curious in a way that keeps me learning independently. The software
+        list on my resume isn't from courses — most of it came from personal projects where I
+        wanted to do something and taught myself what I needed to know to do it. That attitude
+        will serve me well in any technical role where the tools are always evolving.
+      </p>
+      <p>
+        Where I need to grow is in formal project management and structured technical
+        documentation. I'm comfortable with the making — I want to get better at the
+        communicating. My plan is to seek roles early in my career where I work alongside
+        experienced engineers whose documentation and communication habits I can learn from
+        directly, while continuing to build personal projects that push the technical edge
+        of what I know.
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Strengths / Growth summary -->
+  <section class="fade-up">
+    <div class="eyebrow">Self-Assessment</div>
+    <h2>Strengths &amp; <em>Growth Areas</em></h2>
+    <div class="growth-grid" style="margin-top:24px;">
+      <div class="growth-card strength">
+        <div class="gc-label">✦ Strength</div>
+        <h3 style="margin-bottom:6px;">Hands-On Builder's Intuition</h3>
+        <p>Over a decade of building drones, 3D printers, and electronics gives me a physical
+        understanding of how designs come together that complements my formal engineering training.</p>
+      </div>
+      <div class="growth-card strength">
+        <div class="gc-label">✦ Strength</div>
+        <h3 style="margin-bottom:6px;">Self-Directed Learning</h3>
+        <p>I'm comfortable picking up new tools and technologies independently. Most of my
+        software toolkit came from personal projects, not coursework — a habit I intend to keep.</p>
+      </div>
+      <div class="growth-card growth-area">
+        <div class="gc-label">↗ Growth Area</div>
+        <h3 style="margin-bottom:6px;">Formal Technical Documentation</h3>
+        <p>I want to build stronger habits around structured documentation — clear enough that
+        another engineer could pick up my work and continue it. I'll actively seek this in my first role.</p>
+      </div>
+      <div class="growth-card growth-area">
+        <div class="gc-label">↗ Growth Area</div>
+        <h3 style="margin-bottom:6px;">Project Management &amp; Planning</h3>
+        <p>I'm learning to appreciate the value of structured planning upfront. I'll develop this
+        through mentorship in early career positions and by applying formal methodologies to
+        larger personal projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section style="text-align:center;" class="fade-up">
+    <h2>The <em>Journey</em> Continues</h2>
+    <p style="color:var(--muted);max-width:560px;margin:16px auto 28px;">
+      Four years in, and I feel like I'm just starting to understand what engineering actually is.
+      I'm looking forward to finding out.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="project.html" class="btn ghost">← View Project</a>
+      <a href="https://jardinedigital.ca/" target="_blank" class="btn">Visit jardinedigital.ca →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Carter Jardine · Electrical Engineering, UBC Okanagan</p>
+</footer>
+
+<script>
+  function countWords() {
+    const ids = ['answer-1','answer-2','answer-3','answer-4'];
+    let total = 0;
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const words = (el.innerText || '').trim().split(/\s+/).filter(w => w.length > 0);
+        total += words.length;
+      }
+    });
+    return total;
+  }
+  function updateMeter() {
+    const wc = countWords();
+    const target = 300;
+    const pct = Math.min(100, Math.round((wc / target) * 100));
+    document.getElementById('wc-num').textContent = wc;
+    document.getElementById('meter-fill').style.width = pct + '%';
+    const status = document.getElementById('wc-status');
+    const fill = document.getElementById('meter-fill');
+    if (wc < target) {
+      status.textContent = `${target - wc} words to go`;
+      fill.style.background = 'var(--accent2)';
+    } else {
+      status.textContent = '✓ Target met!';
+      fill.style.background = 'var(--accent)';
+    }
+  }
+  window.addEventListener('DOMContentLoaded', () => setTimeout(updateMeter, 300));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me — Carter Jardine ePortfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .hero-about {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    @media (max-width: 640px) {
+      .hero-about { flex-direction: column; align-items: center; text-align: center; }
+      .hero-about .eyebrow { justify-content: center; }
+    }
+    .hero-about h1 { margin-bottom: 16px; }
+    .bio-lead {
+      font-size: 1.12rem;
+      color: var(--text);
+      margin-bottom: 24px;
+      max-width: 600px;
+    }
+    .skill-bar-wrap { margin-bottom: 12px; }
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .skill-bar {
+      height: 5px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transform-origin: left;
+      animation: growBar 1s ease both;
+    }
+    @keyframes growBar {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    .interests { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .interest-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      color: var(--text);
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-chip:hover { color: var(--accent); border-color: rgba(93,255,182,0.3); text-decoration: none; }
+    .contact-chip svg { flex-shrink: 0; }
+    .proj-thumb { display: flex; gap: 20px; align-items: flex-start; }
+    .proj-thumb .num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: right;
+    }
+    .software-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .sw-chip {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 5px 13px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .sw-chip:hover { border-color: rgba(93,255,182,0.3); color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Carter <span>Jardine</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">About Me</a></li>
+    <li><a href="project.html">Project</a></li>
+    <li><a href="reflection.html">Reflection</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <!-- Hero -->
+  <section class="hero-about fade-up">
+    <div class="avatar-wrap" style="margin-top:6px;">
+      <!-- To add your headshot replace the div below with:
+           <img src="headshot.jpg" alt="Carter Jardine" /> -->
+      <div class="avatar-initials">CJ</div>
+    </div>
+    <div>
+      <div class="eyebrow">ePortfolio — About Me</div>
+      <h1>Hi, I'm <em>Carter Jardine</em>.</h1>
+      <p class="bio-lead">
+        A fourth-year <strong>Electrical Engineering</strong> student at <strong>UBC Okanagan</strong>
+        with a lifelong passion for drones, robotics, and electronics — from competitive FPV racing
+        to custom battery packs and everything in between.
+      </p>
+      <div class="contact-row">
+        <a href="https://jardinedigital.ca/" target="_blank" class="contact-chip">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          jardinedigital.ca
+        </a>
+        <a href="https://linkedin.com/in/carter-jardine" target="_blank" class="contact-chip">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/carterjardine" target="_blank" class="contact-chip">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Background -->
+  <section class="fade-up delay-1">
+    <div class="eyebrow">Background</div>
+    <h2>Academic <em>Journey</em></h2>
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <h3>Education</h3>
+        <p>
+          <strong>B.ASc. Electrical Engineering</strong><br/>
+          UBC Okanagan, Kelowna, BC — Expected 2025
+        </p>
+        <div class="tags" style="margin-top:16px;">
+          <span class="tag">Power Systems</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">PCB Design</span>
+          <span class="tag">Control Systems</span>
+          <span class="tag">Signal Processing</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>My Story</h3>
+        <p>
+          Born and raised in <strong>Kelowna, BC</strong>, I grew up hiking, fishing, and
+          backpacking across the Okanagan. My curiosity for electronics started early — I built
+          my first 3D printer at 15, and went on to compete
+          <strong>provincially in drone building and racing</strong>. Engineering school gave me
+          the theory to back up what I was already building in the garage.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Skills -->
+  <section class="fade-up delay-2">
+    <div class="eyebrow">Capabilities</div>
+    <h2>Skills &amp; <em>Tools</em></h2>
+    <div class="grid-2" style="margin-top:24px;">
+      <div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>3D Printing &amp; Fabrication</span><span>Expert</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:93%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>PCB Design (KiCad / EAGLE)</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>CAD (Fusion 360 / SolidWorks / FreeCAD)</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>Battery &amp; Power System Design</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>Embedded Dev (ESP32 / STM32 / Arduino)</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:76%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>Circuit Simulation (LTSpice / MATLAB)</span><span>Proficient</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:74%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>3D Modelling (Blender / AutoCAD)</span><span>Competent</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:64%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>Version Control (Git / GitHub)</span><span>Competent</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:68%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:36px;margin-bottom:4px;">Software &amp; Platforms</h3>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:0;">Tools used across coursework, capstone, and personal projects:</p>
+    <div class="software-grid">
+      <span class="sw-chip">KiCad</span>
+      <span class="sw-chip">EAGLE</span>
+      <span class="sw-chip">Fusion 360</span>
+      <span class="sw-chip">FreeCAD</span>
+      <span class="sw-chip">SolidWorks</span>
+      <span class="sw-chip">Blender</span>
+      <span class="sw-chip">AutoCAD</span>
+      <span class="sw-chip">MATLAB</span>
+      <span class="sw-chip">LTSpice</span>
+      <span class="sw-chip">OrcaSlicer</span>
+      <span class="sw-chip">Klipper</span>
+      <span class="sw-chip">Marlin</span>
+      <span class="sw-chip">Espressif (ESP-IDF)</span>
+      <span class="sw-chip">STM32CubeIDE</span>
+      <span class="sw-chip">Arduino IDE</span>
+      <span class="sw-chip">GitHub</span>
+      <span class="sw-chip">VSCode</span>
+      <span class="sw-chip">Home Assistant</span>
+      <span class="sw-chip">Claude AI</span>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Career Aspirations -->
+  <section class="fade-up delay-3">
+    <div class="eyebrow">Looking Ahead</div>
+    <h2>Career <em>Aspirations</em></h2>
+    <div class="card" style="margin-top:24px;">
+      <p>
+        I want to build things that fly, drive, and think. My goal is to work in <strong>drones
+        and robotics</strong> — whether that means designing flight controllers, engineering
+        autonomous navigation systems, or building the power systems that keep UAVs airborne longer.
+      </p>
+      <p>
+        I'm also deeply interested in <strong>PCB design</strong> and <strong>battery engineering</strong>.
+        The intersection of compact electronics, high-efficiency power delivery, and real-world
+        ruggedization is where I feel most at home as an engineer. I want to contribute to teams
+        pushing what's possible in these areas — especially in applications with real-world impact
+        like search and rescue, environmental monitoring, and autonomous systems.
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Interests -->
+  <section class="fade-up delay-4">
+    <div class="eyebrow">Beyond the Lab</div>
+    <h2>Personal <em>Interests</em></h2>
+    <p style="margin: 16px 0 24px; color:var(--muted);">
+      Growing up in the Okanagan shaped me as much as any course. When I'm not soldering:
+    </p>
+    <div class="interests">
+      <div class="interest-chip"><span>🎣</span> Fishing</div>
+      <div class="interest-chip"><span>🏔️</span> Hiking &amp; Backpacking</div>
+      <div class="interest-chip"><span>⛺</span> Camping</div>
+      <div class="interest-chip"><span>🚁</span> Drone Racing &amp; Building</div>
+      <div class="interest-chip"><span>🖨️</span> 3D Printing</div>
+      <div class="interest-chip"><span>🤖</span> Robotics</div>
+      <div class="interest-chip"><span>🔋</span> Battery Technology</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Other Projects -->
+  <section class="fade-up delay-4">
+    <div class="eyebrow">Featured Work</div>
+    <h2>Other <em>Projects</em></h2>
+    <p style="color:var(--muted); margin-bottom:24px;">
+      A selection of personal and academic projects — see the full portfolio at
+      <a href="https://jardinedigital.ca/" target="_blank">jardinedigital.ca</a>.
+    </p>
+    <div style="display:flex; flex-direction:column; gap:16px;">
+
+      <div class="card">
+        <div class="proj-thumb">
+          <div class="num">01</div>
+          <div>
+            <h3>Custom 3D Printer Builds</h3>
+            <p style="color:var(--muted);font-size:0.9rem;">
+              Designed, assembled, and calibrated multiple 3D printers from scratch —
+              including Klipper-based machines with custom firmware and toolhead modifications.
+              My first build started at age 15 and I haven't stopped since.
+            </p>
+            <div class="tags" style="margin-top:10px;">
+              <span class="tag">Klipper</span>
+              <span class="tag">Marlin</span>
+              <span class="tag">Mechanical Design</span>
+              <span class="tag">Embedded</span>
+            </div>
+            <a href="https://jardinedigital.ca/" target="_blank" class="btn ghost" style="margin-top:16px;font-size:0.78rem;padding:8px 18px;">
+              See Full Portfolio →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="proj-thumb">
+          <div class="num">02</div>
+          <div>
+            <h3>Competitive FPV Drone Racing</h3>
+            <p style="color:var(--muted);font-size:0.9rem;">
+              Built and tuned FPV racing drones for <strong>provincial-level competition in BC</strong>
+              — covering frame design, component selection, ESC programming, and flight controller
+              tuning from the ground up.
+            </p>
+            <div class="tags" style="margin-top:10px;">
+              <span class="tag">FPV</span>
+              <span class="tag">Electronics</span>
+              <span class="tag">Competition</span>
+              <span class="tag">UAV</span>
+            </div>
+            <a href="https://jardinedigital.ca/" target="_blank" class="btn ghost" style="margin-top:16px;font-size:0.78rem;padding:8px 18px;">
+              See Full Portfolio →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section style="text-align:center;" class="fade-up delay-4">
+    <h2>Let's <em>Connect</em></h2>
+    <p style="color:var(--muted); margin-bottom:28px;">
+      Interested in drones, PCB design, battery systems, or just want to talk engineering?
+    </p>
+    <a href="https://jardinedigital.ca/" target="_blank" class="btn">Visit jardinedigital.ca →</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Carter Jardine · Electrical Engineering, UBC Okanagan</p>
+</footer>
+
+</body>
+</html>
